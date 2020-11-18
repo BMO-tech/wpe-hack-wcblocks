@@ -31,3 +31,8 @@ function wcblocks_add_category( $categories ) {
 	);
 }
 add_filter( 'block_categories', 'wcblocks_add_category' );
+
+/**
+ * Register Block Assets
+ */
+require_once 'src/blocks/hero/index.php';
