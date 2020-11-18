@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  padding: 0 4em 0 4em;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  color: whitesmoke;
+  min-height: 15em;
+}

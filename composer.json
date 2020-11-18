@@ -1,0 +1,27 @@
+{
+    "name": "bmo/wcblocks",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "BMO",
+            "email": "bmo@wpengine.com"
+        }
+    ],
+    "repositories": [
+        {
+          "type": "git",
+          "url": "https://github.com/wpengine/wpengine-coding-standards.git"
+        }
+      ],
+    "require": {},
+    "require-dev": {
+        "wpengine/wpengine-coding-standards": "dev-master"
+    },
+    "scripts": {
+        "lint": "phpcs --standard=phpcs.xml.dist ./lib",
+        "test": "vendor/bin/phpunit --testdox",
+        "fix:lint": "phpcbf --standard=phpcs.xml.dist ./lib",
+        "fix:autoload": "composer dump-autoload && composer install -o"
+    }
+
+}
