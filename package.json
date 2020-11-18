@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run --prefix components build && wp-scripts build",
+    "setup": "npm --prefix components install && npm install",
     "start": "npm run --prefix components start & wp-scripts start",
     "test": "npm run --prefix components test"
   },
