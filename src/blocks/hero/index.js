@@ -4,7 +4,7 @@ import { __ } from '@wordpress/i18n'
 /**
  * Define Custom Elements (Web Components)
  */
-import { defineCustomElements } from '@/components/dist/custom-elements'
+import { defineCustomElements } from '@/components/dist/custom-elements/index.js'
 defineCustomElements()
 
 import './editor.scss';
