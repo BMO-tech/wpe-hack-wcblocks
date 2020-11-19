@@ -1,0 +1,66 @@
+version: "3.7"
+services:
+  nginx:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    container_name: nginx.wcblocks
+    networks:
+      - wcblocks
+
+  db:
+    image: mariadb:10
+    volumes:
+      - db_data:/var/lib/mysql
+    env_file: .env
+    container_name: db.wcblocks
+    networks:
+      - wcblocks
+
+  wordpress:
+    image: wordpress:latest
+    depends_on:
+      - db
+    expose:
+      - 8000
+    env_file: .env
+    environment:
+      - VIRTUAL_HOST=${WORDPRESS_HOST}
+    container_name: wp.wcblocks
+    volumes:
+      - ./wcblocks:/var/www/html/wp-content/plugins/wcblocks:cached
+    networks:
+      - wcblocks
+
+  adminer:
+    image: adminer
+    expose:
+      - 8080
+    container_name: adminer.wcblocks
+    env_file: .env
+    environment:
+      - VIRTUAL_HOST=${ADMINER_HOST}
+    networks:
+      - wcblocks
+
+  verdaccio:
+    image: verdaccio/verdaccio:4
+    expose:
+      - 4873
+    env_file: .env
+    environment:
+      - VIRTUAL_HOST=${VERDACCIO_HOST}
+    volumes:
+      - verdaccio:/verdaccio
+    container_name: verdaccio.wcblocks
+    networks:
+      - wcblocks
+
+volumes:
+  db_data:
+  verdaccio:
+
+networks:
+  wcblocks:
