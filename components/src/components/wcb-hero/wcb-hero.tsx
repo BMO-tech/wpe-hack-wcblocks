@@ -8,13 +8,16 @@ import { Component, Host, h, Prop } from '@stencil/core';
 export class WcbHero {
   @Prop() heading: string;
   @Prop() ctaText: string;
+  @Prop() backgroundUrl: string;
 
   render() {
     return (
       <Host>
-        <h1>{this.heading}</h1>
-        <p>Hello World</p>
-        <p>{this.ctaText}</p>
+        <div style={{ backgroundImage:"url('" + this.backgroundUrl + "')" }}>
+          <h1>{this.heading}</h1>
+          <p>Hello World</p>
+          <p>{this.ctaText}</p>
+        </div>
       </Host>
     );
   }
