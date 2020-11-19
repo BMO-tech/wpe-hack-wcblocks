@@ -1,17 +1,56 @@
+## Include .env file
+ifneq (,$(wildcard ./.env))
+    include .env
+    export
+endif
+
+## Set more variables
 DOCKER_COMPOSE_CMD  ?= docker-compose
 DOCKER_COMPOSE_CONF ?= docker-compose.yml
+DOCKER_GLOBAL_CONF  ?= global-compose.yml
 PARENT_PATH         ?= $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/.)
+NETWORK_NAME        ?= wcblocks
 
 SERVICES = stencil wcblocks
 
-.PHONY: up down restart build install lint test
-restart: down up
-up: .dc-up
+## Define shortcup commands
+.PHONY: up down start clean clear build install lint test
+up: .dc-up-d
+up-g: .dc-g-up-d
 down: .dc-down
+down-g: .dc-g-down-v
+start: .start-all
+clean: clear
+clear: .dc-down-v .dc-g-down-v
 build: .build-all
 install: .install-all
 lint: .lint-all
 test: .test-all
+
+## Actual make commands
+.dc-up-d:
+	@echo
+	@echo "# Running docker-compose up -d"
+	@$(DOCKER_COMPOSE_CMD) -f $(DOCKER_COMPOSE_CONF) up -d
+	@echo
+
+.dc-g-up-d:
+	@echo
+	@echo "# Running global-compose up -d"
+	@$(DOCKER_COMPOSE_CMD) -f $(DOCKER_GLOBAL_CONF) up -d
+	@echo
+	
+.dc-down-v:
+	@echo
+	@echo "# Running docker-compose down -v"
+	@$(DOCKER_COMPOSE_CMD) -f $(DOCKER_COMPOSE_CONF) down -v --remove-orphans
+	@echo
+
+.dc-g-down-v:
+	@echo
+	@echo "# Running global-compose down -v"
+	@$(DOCKER_COMPOSE_CMD) -f $(DOCKER_GLOBAL_CONF) down -v --remove-orphans
+	@echo
 
 .dc-%:
 	@echo
@@ -28,8 +67,18 @@ test: .test-all
 .build-%:
 	@echo
 	@echo "# Building $*"
-	@sudo rm -rf $(PARENT_PATH)/$*/dist
-	@docker run -it --rm -v $(PARENT_PATH)/$*:/app:cached -w /app node:14 npm run build
+	@npm run --prefix $* build
+	
+.start-all:
+	@echo "# Starting all services"
+	@for service in $(SERVICES); do \
+		$(MAKE) -s .start-$$service; \
+	done
+
+.start-%:
+	@echo
+	@echo "# Starting $*"
+	@npm run --prefix $* start
 
 .install-all:
 	@echo "# Installing all services"
@@ -40,7 +89,7 @@ test: .test-all
 .install-%:
 	@echo
 	@echo "# Installing $*"
-	@docker run -it --rm -v $(PARENT_PATH)/$*:/app:cached -w /app node:14 npm install
+	@npm install --prefix $*
 	
 .lint-all:
 	@echo "# Linting all services"
@@ -51,7 +100,7 @@ test: .test-all
 .lint-%:
 	@echo
 	@echo "# Linting $(PARENT_PATH)/$*"
-	@docker run -it --rm -v $(PARENT_PATH)/$*:/app:cached -w /app node:14 npm run lint
+	@npm run --prefix $* lint
 
 .test-all:
 	@echo "# Testing all services"
@@ -62,4 +111,26 @@ test: .test-all
 .test-%:
 	@echo
 	@echo "# Testing $*"
-	@docker run -it --rm -v $(PARENT_PATH)/$*:/app:cached -w /app node:14 npm run test
+	@npm run --prefix $* test
+	
+.publish-all:
+	@echo "# Installing all services"
+	@for service in $(SERVICES); do \
+		$(MAKE) -s .publish-$$service; \
+	done
+
+.publish-%:
+	@echo
+	@echo "# Publishing $*"
+	@npm publish $* --registry http://$(VERDACCIO_HOST)
+	
+setup: clean .dc-g-up-d
+	@echo "# Setting up the Dev Environment"
+	@$(MAKE) -s .install-stencil
+	@$(MAKE) -s .build-stencil
+	@npm adduser --registry http://$(VERDACCIO_HOST)
+	@npm set registry http://$(VERDACCIO_HOST)
+	@$(MAKE) -s .publish-stencil
+	@$(MAKE) -s .install-wcblocks
+	@$(MAKE) -s .build-wcblocks
+	@$(DOCKER_COMPOSE_CMD) -f $(DOCKER_COMPOSE_CONF) up -d
