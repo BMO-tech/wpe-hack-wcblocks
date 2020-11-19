@@ -16,5 +16,10 @@ module.exports = {
     output: {
         path: blockDirectory.hero.buildPath,
         filename: blockDirectory.hero.buildName,
+    },
+    resolve: {
+        alias: {
+            "@": path.resolve(process.cwd(), './'),
+        },
     }
 }

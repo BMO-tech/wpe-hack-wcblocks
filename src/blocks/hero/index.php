@@ -14,13 +14,15 @@ function wcb_register_block_hero() {
 		$build_asset['dependencies'],
 		$build_asset['version']
 	);
-
 	wp_enqueue_script( 'wcb-block-editor' );
 
 	wp_localize_script(
 		'wcb-block-editor',
 		'wcbBlockHero',
-		[ 'url' => esc_url( plugin_dir_url( __FILE__ ) ) . 'build' ]
+		[
+			'url'  => esc_url( plugin_dir_url( __FILE__ ) ) . 'build',
+			'test' => plugins_url( 'components/dist/index.js', __DIR__ ),
+		]
 	);
 
 	wp_register_style(
@@ -31,7 +33,7 @@ function wcb_register_block_hero() {
 	);
 
 	register_block_type(
-		'bmo/wcblocks',
+		'wcb/blocks',
 		[
 			'editor_script' => 'wcb-block-editor',
 			'editor_style'  => 'wcb-block-editor',
