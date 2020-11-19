@@ -43,6 +43,8 @@ VERDACCIO_HOST=npm.wcblocks.local
 
 - `make install` Runs `npm install` for `stencil` and `wcblocks` directories
 - `make build` Runs `npm run build` for `stencil` and `wcblocks` directories
+- `make .publish-stencil` Runs `npm publish stencil --registry http://npm.wcblocks.local`
+- `make .start-stencil` Runs `npm run --prefix stencil start`
 - `make up-g` Runs `docker-compose up -d` for the `global-compose.yml` config
 - `make up` Runs `docker-compose up -d` for the `docker-compose.yml` config
 - `make down-g` Runs `docker-compose down -v --remove-orphans`
