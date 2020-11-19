@@ -15,7 +15,6 @@ const heroTemplate = () => {
     )
 }
 
-
 registerBlockType('wcblocks/hero', {
     title: __('WCBlocks Hero', 'wcblocks'),
     description: __('WC Hero Block', 'wcblocks'),
