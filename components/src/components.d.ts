@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface WcbHero {
+        "backgroundUrl": string;
         "ctaText": string;
         "heading": string;
     }
@@ -24,6 +25,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface WcbHero {
+        "backgroundUrl"?: string;
         "ctaText"?: string;
         "heading"?: string;
     }
