@@ -11,6 +11,19 @@ services:
     volumes:
       - ./wcblocks:/var/www/html/wp-content/plugins/wcblocks:cached
 
+  next:
+    image: node:14
+    expose:
+      - 3000
+    env_file: .env
+    environment:
+      - VIRTUAL_HOST=${NEXT_HOST}
+    container_name: next.wcblocks
+    working_dir: /home/node/app
+    volumes:
+      - ./next-wcb:/home/node/app:cached
+    command: ["npm", "run", "dev"]
+
 networks:
   default:
     external:

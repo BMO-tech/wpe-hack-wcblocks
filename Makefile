@@ -11,14 +11,14 @@ DOCKER_GLOBAL_CONF  ?= global-compose.yml
 PARENT_PATH         ?= $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/.)
 NETWORK_NAME        ?= wcblocks
 
-SERVICES = stencil wcblocks
+SERVICES = next stencil wcblocks
 
 ## Define shortcup commands
-.PHONY: up down start clean clear build install lint test
 up: .dc-up-d
 up-g: .dc-g-up-d
 down: .dc-down
 down-g: .dc-g-down-v
+restart: down up
 start: .start-all
 clean: clear
 clear: .dc-down-v .dc-g-down-v
@@ -131,6 +131,6 @@ setup: clean .dc-g-up-d
 	@npm adduser --registry http://$(VERDACCIO_HOST)
 	@npm set registry http://$(VERDACCIO_HOST)
 	@$(MAKE) -s .publish-stencil
-	@$(MAKE) -s .install-wcblocks
+	@$(MAKE) -s .install-all
 	@$(MAKE) -s .build-wcblocks
 	@$(DOCKER_COMPOSE_CMD) -f $(DOCKER_COMPOSE_CONF) up -d
