@@ -21,6 +21,12 @@ registerBlockType('wcblocks/hero', {
             selector: 'wcb-hero',
             attribute: 'heading',
 		},
+		secondaryText: {
+			type: 'string',
+            source: 'attribute',
+            selector: 'wcb-hero',
+            attribute: 'cta-text',
+		},
     },    
     description: __('WC Hero Block', 'wcblocks'),
     category: 'wcblocks',
