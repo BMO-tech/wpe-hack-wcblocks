@@ -7,9 +7,11 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface WcbHero {
-        "backgroundUrl": string;
+        "backgroundUrl1": string;
+        "backgroundUrl2": string;
         "ctaText": string;
         "heading": string;
+        "middleText": string;
     }
 }
 declare global {
@@ -25,9 +27,11 @@ declare global {
 }
 declare namespace LocalJSX {
     interface WcbHero {
-        "backgroundUrl"?: string;
+        "backgroundUrl1"?: string;
+        "backgroundUrl2"?: string;
         "ctaText"?: string;
         "heading"?: string;
+        "middleText"?: string;
     }
     interface IntrinsicElements {
         "wcb-hero": WcbHero;

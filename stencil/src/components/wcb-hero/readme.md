@@ -7,11 +7,13 @@
 
 ## Properties
 
-| Property        | Attribute        | Description | Type     | Default     |
-| --------------- | ---------------- | ----------- | -------- | ----------- |
-| `backgroundUrl` | `background-url` |             | `string` | `undefined` |
-| `ctaText`       | `cta-text`       |             | `string` | `undefined` |
-| `heading`       | `heading`        |             | `string` | `undefined` |
+| Property         | Attribute          | Description | Type     | Default     |
+| ---------------- | ------------------ | ----------- | -------- | ----------- |
+| `backgroundUrl1` | `background-url-1` |             | `string` | `undefined` |
+| `backgroundUrl2` | `background-url-2` |             | `string` | `undefined` |
+| `ctaText`        | `cta-text`         |             | `string` | `undefined` |
+| `heading`        | `heading`          |             | `string` | `undefined` |
+| `middleText`     | `middle-text`      |             | `string` | `undefined` |
 
 
 ----------------------------------------------
