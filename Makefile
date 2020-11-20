@@ -21,7 +21,7 @@ down-g: .dc-g-down-v
 restart: down up
 start: .start-all
 clean: clear
-clear: .dc-down-v .dc-g-down-v
+clear: .dc-down-v .dc-g-down-v .registry-reset
 build: .build-all
 install: .install-all
 update: .update-all
@@ -147,6 +147,11 @@ test: .test-all
 	@echo
 	@echo "# Publishing $*"
 	@npm publish $* --registry http://$(VERDACCIO_HOST)
+	
+.registry-reset:
+	@echo
+	@echo "# Resetting NPM Registry"
+	@npm config set registry https://registry.npmjs.org/
 	
 setup: clean .dc-g-up-d
 	@echo "# Setting up the Dev Environment"
