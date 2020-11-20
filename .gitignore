@@ -3,4 +3,6 @@
 **/build
 **/dist
 **/.env
-**/www
+stencil/www
+stencil/loader
+stencil/react

@@ -1,12 +1,8 @@
 import '../styles/globals.css'
-import { defineCustomElements } from '@wcblocks/components/dist/custom-elements/index.js'
+import { defineCustomElements } from '@wcblocks/components/loader/index.cjs'
 
 function MyApp({ Component, pageProps }) {
-  /**
-   * Define Custom Elements (Web Components)
-   */
   defineCustomElements()
-
   return <Component {...pageProps} />
 }
 
