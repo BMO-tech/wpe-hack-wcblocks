@@ -24,6 +24,19 @@ services:
       - ./next-wcb:/home/node/app:cached
     command: ["npm", "run", "dev"]
 
+  vue:
+    image: node:14
+    expose:
+      - 8080
+    env_file: .env
+    environment:
+      - VIRTUAL_HOST=${VUE_HOST}
+    container_name: vue.wcblocks
+    working_dir: /home/node/app
+    volumes:
+      - ./vue-wcb:/home/node/app:cached
+    command: ["npm", "run", "serve"]
+
 networks:
   default:
     external:

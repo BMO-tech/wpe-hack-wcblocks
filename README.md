@@ -30,6 +30,12 @@ ADMINER_HOST=adminer.wcblocks.local
 
 ## VERDACCIO
 VERDACCIO_HOST=npm.wcblocks.local
+
+## NEXT
+NEXT_HOST=next.wcblocks.local
+
+## VUE
+VUE_HOST=vue.wcblocks.local
 ```
 
 ### Hosts file
