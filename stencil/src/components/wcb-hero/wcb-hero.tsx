@@ -13,7 +13,7 @@ export class WcbHero {
   render() {
     return (
       <Host>
-        <div style={{ backgroundImage:"url('" + this.backgroundUrl + "')" }}>
+        <div class="hero-container" style={{ backgroundImage:"url('" + this.backgroundUrl + "')" }}>
           <h1>{this.heading}</h1>
           <p>Hello World</p>
           <p>{this.ctaText}</p>
