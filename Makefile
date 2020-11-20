@@ -11,7 +11,7 @@ DOCKER_GLOBAL_CONF  ?= global-compose.yml
 PARENT_PATH         ?= $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/.)
 NETWORK_NAME        ?= wcblocks
 
-SERVICES = next stencil wcblocks
+SERVICES = next-wcb stencil wcblocks vue-wcb
 
 ## Define shortcup commands
 up: .dc-up-d
@@ -24,6 +24,8 @@ clean: clear
 clear: .dc-down-v .dc-g-down-v
 build: .build-all
 install: .install-all
+update: .update-all
+destroy: clear .destroy-all
 lint: .lint-all
 test: .test-all
 
@@ -90,6 +92,28 @@ test: .test-all
 	@echo
 	@echo "# Installing $*"
 	@npm install --prefix $*
+
+.update-all:
+	@echo "# Updating all services"
+	@for service in $(SERVICES); do \
+		$(MAKE) -s .update-$$service; \
+	done
+
+.update-%:
+	@echo
+	@echo "# Updating $*"
+	@npm update --prefix $*
+
+.destroy-all:
+	@echo "# Destroy node_modules and package locks"
+	@for service in $(SERVICES); do \
+		$(MAKE) -s .destroy-$$service; \
+	done
+
+.destroy-%:
+	@echo
+	@echo "# Destroy $*"
+	@sudo rm -rf $*/node_modules $*/package-lock.json
 	
 .lint-all:
 	@echo "# Linting all services"
