@@ -10,10 +10,6 @@ const Edit = ( props ) => {
     const { attributes, setAttributes } = props;
 
     const {
-        RichText,
-        AlignmentToolbar,
-        BlockControls,
-        BlockAlignmentToolbar,
         InspectorControls,
      } = wp.blockEditor;
 
@@ -31,8 +27,8 @@ const Edit = ( props ) => {
                     <TextControl
                         label={ __( 'Heading Text' ) }
                         value={ attributes.headingText }
-                        onChange={ ( newRel ) =>
-                            setAttributes( { headingText: newRel } )
+                        onChange={ ( newVal ) =>
+                            setAttributes( { headingText: newVal } )
                         }
 					/>
                     </PanelRow>
