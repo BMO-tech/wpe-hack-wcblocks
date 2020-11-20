@@ -23,12 +23,21 @@ const Edit = ( props ) => {
 		<>
             <InspectorControls>
                 <PanelBody title={ __( 'Web Component Block Settings', 'wcblocks' ) } >
-                    <PanelRow>
+                <PanelRow>
                         <TextControl
                             label={ __( 'Heading Text' ) }
                             value={ attributes.headingText }
                             onChange={ ( newVal ) =>
                                 setAttributes( { headingText: newVal } )
+                            }
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <TextControl
+                            label={ __( 'Middle Text' ) }
+                            value={ attributes.middleText }
+                            onChange={ ( newVal ) =>
+                                setAttributes( { middleText: newVal } )
                             }
                         />
                     </PanelRow>
@@ -41,12 +50,32 @@ const Edit = ( props ) => {
                             }
                         />
                     </PanelRow>
+                    <PanelRow>
+                        <TextControl
+                            label={ __( 'Background URL 1' ) }
+                            value={ attributes.backgroundUrl1 }
+                            onChange={ ( newVal ) =>
+                                setAttributes( { backgroundUrl1: newVal } )
+                            }
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <TextControl
+                            label={ __( 'Background URL 2' ) }
+                            value={ attributes.backgroundUrl2 }
+                            onChange={ ( newVal ) =>
+                                setAttributes( { backgroundUrl2: newVal } )
+                            }
+                        />
+                    </PanelRow>
                 </PanelBody>
             </InspectorControls>
             <wcb-hero
                 heading={ attributes.headingText } 
                 cta-text={ attributes.secondaryText }
-                background-url="https://assets.newatlas.com/dims4/default/3368e6d/2147483647/strip/true/crop/925x617+0+232/resize/2400x1600!/format/webp/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Farchive%2Fchandra-nasa-space-telescope-anniversary-4.jpg"
+                middle-text={ attributes.middleText }
+                background-url-1={ attributes.backgroundUrl1 }
+                background-url-2={ attributes.backgroundUrl2 }
             />
 		</>
 	);
