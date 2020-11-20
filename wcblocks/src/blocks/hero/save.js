@@ -7,13 +7,12 @@ import { __ } from '@wordpress/i18n'
  * @return {Function} The Save function for the block.
  */
 const Save = ( props ) => {
-    const {
-        headingText
-    } = props.attributes;
+    const { attributes } = props;
+
 	return (
 		<>
             <wcb-hero
-                heading={ headingText } 
+                heading={ attributes.headingText } 
                 cta-text="look at me"
                 background-url="https://assets.newatlas.com/dims4/default/3368e6d/2147483647/strip/true/crop/925x617+0+232/resize/2400x1600!/format/webp/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Farchive%2Fchandra-nasa-space-telescope-anniversary-4.jpg"
             />

@@ -17,8 +17,9 @@ registerBlockType('wcblocks/hero', {
     attributes: {
 		headingText: {
 			type: 'string',
-            source: 'children',
-            default: 'this is the default text'
+            source: 'attribute',
+            selector: 'wcb-hero',
+            attribute: 'heading',
 		},
     },    
     description: __('WC Hero Block', 'wcblocks'),
