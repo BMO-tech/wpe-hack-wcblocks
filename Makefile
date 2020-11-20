@@ -11,7 +11,7 @@ DOCKER_GLOBAL_CONF  ?= global-compose.yml
 PARENT_PATH         ?= $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/.)
 NETWORK_NAME        ?= wcblocks
 
-SERVICES = next-wcb stencil wcblocks
+SERVICES = next-wcb stencil wcblocks vue-wcb
 
 ## Define shortcup commands
 up: .dc-up-d
